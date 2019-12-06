@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
             //
             mDegreeOld = mDegree%360
             //speed of rotation
-            mDegree = (1000).toFloat()
+            mDegree = (mRandom.nextInt(360) + 5000).toFloat()
             var mRotate = RotateAnimation(mDegreeOld, mDegree,
                 RotateAnimation.RELATIVE_TO_SELF, 0.5f,
                 RotateAnimation.RELATIVE_TO_SELF, 0.5f)

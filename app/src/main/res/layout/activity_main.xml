@@ -72,6 +72,7 @@
         android:id="@+id/gimWaiting"
         android:layout_width="350dp"
         android:layout_height="350dp"
+        android:visibility="invisible"
         android:background="@drawable/giphy"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
