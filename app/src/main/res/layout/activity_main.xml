@@ -9,9 +9,9 @@
 
     <Button
         android:id="@+id/btn_spin"
-        android:layout_width="250dp"
+        android:layout_width="@dimen/_100sdp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="@dimen/_64sdp"
         android:background="@drawable/cusom_button_spin"
         android:text="SPIN"
         app:layout_constraintBottom_toBottomOf="@+id/imGift"
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:textColor="#ff00"
-        android:textSize="120px"
+        android:textSize="@dimen/_40sdp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -32,8 +32,8 @@
 
     <ImageView
         android:id="@+id/imRoulette"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,8 +42,8 @@
 
     <ImageView
         android:id="@+id/imPointer"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
         android:rotation="180"
         android:scaleType="centerInside"
         app:layout_constraintLeft_toLeftOf="@+id/imRoulette"
@@ -60,9 +60,8 @@
 
     <ImageView
         android:id="@+id/imGift"
-        android:layout_width="350dp"
-        android:layout_height="350dp"
-        android:background="@drawable/giphy"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,10 +69,10 @@
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gimWaiting"
-        android:layout_width="350dp"
-        android:layout_height="350dp"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
         android:visibility="invisible"
-        android:background="@drawable/giphy"
+        android:src="@drawable/giphy"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -92,6 +91,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.8" />
+        app:layout_constraintGuide_percent="0.9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
