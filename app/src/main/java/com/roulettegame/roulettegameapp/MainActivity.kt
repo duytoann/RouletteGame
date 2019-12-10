@@ -1,5 +1,6 @@
 package com.roulettegame.roulettegameapp
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
@@ -8,6 +9,7 @@ import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.RotateAnimation
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -15,16 +17,18 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    private var PRIVATE_MODE = 0
+    private val PREF_NAME = "mindorks-welcome"
     private lateinit var mRandom: Random
     private var mDegree : Float = 0f
     private var mDegreeOld : Float = 0f
     private var tempDegree : Float = 0f
-    private var i = 0
     private val caseOfGift: IntArray = intArrayOf(0, 0, 1, 4, 0, 0, 0, 0, 3, 3, 0, 3, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 5, 0, 0, 4, 0, 5, 0, 0, 3, 0, 4, 0, 3, 5, 0, 0, 0, 0, 0, 0, 1, 1, 0, 6, 2, 0, 2, 0, 0, 0, 1, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 3, 0, 0, 4, 0, 0, 0, 0, 4, 1, 1, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 6, 4, 1, 0, 0, 0, 4, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 5, 3, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 5, 0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val sharedPref: SharedPreferences = getSharedPreferences(PREF_NAME, PRIVATE_MODE)
         mRandom = Random()
         btn_spin.setOnClickListener{
             //running
@@ -38,7 +42,8 @@ class MainActivity : AppCompatActivity() {
             //
             mDegreeOld = mDegree%360
             //speed of rotation
-            when(caseOfGift[i]){
+            Log.d("uytai", sharedPref.getInt(PREF_NAME, 0).toString())
+            when(caseOfGift[sharedPref.getInt(PREF_NAME, 0)]){
                 0 -> tempDegree = 18f
                 1 -> tempDegree = 342f
                 2 -> tempDegree = 306f
@@ -66,7 +71,10 @@ class MainActivity : AppCompatActivity() {
                     gimWaiting.visibility = View.GONE
                     imGift.visibility = View.VISIBLE
                     getGift(mDegree % 360)
-                    i++
+                    val editor = sharedPref.edit()
+                    val index = sharedPref.getInt(PREF_NAME, 0) + 1
+                    editor.putInt(PREF_NAME, index)
+                    editor.apply()
                     //tvGiftName.text = currentNumber(360-mDegree % 360)
                     btn_spin.isClickable = true
                 }
@@ -74,6 +82,15 @@ class MainActivity : AppCompatActivity() {
                 override fun onAnimationRepeat(animation: Animation) {}
             })
             imRoulette.startAnimation(mRotate)
+        }
+
+        //clear pref
+        imPointer.setOnLongClickListener{
+            val editor = sharedPref.edit()
+            editor.putInt(PREF_NAME, 0)
+            editor.apply()
+            Toast.makeText(this, sharedPref.getInt(PREF_NAME, -1).toString(), Toast.LENGTH_SHORT).show()
+            true
         }
     }
 
