@@ -38,7 +38,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imPointer"
-        app:srcCompat="@drawable/roulette_img" />
+        app:srcCompat="@drawable/img" />
 
     <ImageView
         android:id="@+id/imPointer"
