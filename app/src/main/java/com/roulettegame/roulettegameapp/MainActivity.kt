@@ -42,7 +42,6 @@ class MainActivity : AppCompatActivity() {
             //
             mDegreeOld = mDegree%360
             //speed of rotation
-            Log.d("uytai", sharedPref.getInt(PREF_NAME, 0).toString())
             when(caseOfGift[sharedPref.getInt(PREF_NAME, 0)]){
                 0 -> tempDegree = 18f
                 1 -> tempDegree = 342f
@@ -52,9 +51,9 @@ class MainActivity : AppCompatActivity() {
                 5 -> tempDegree = 126f
                 6 -> tempDegree = 54f
             }
-            mDegree = (tempDegree + 360*4)
+            mDegree = (360-tempDegree + 1440)
             var mRotate = RotateAnimation(
-                mDegreeOld, -mDegree,
+                mDegreeOld, mDegree,
                 RotateAnimation.RELATIVE_TO_SELF, 0.5f,
                 RotateAnimation.RELATIVE_TO_SELF, 0.5f)
             //time to rotate
@@ -70,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                     //stop
                     gimWaiting.visibility = View.GONE
                     imGift.visibility = View.VISIBLE
-                    getGift(mDegree % 360)
+                    tvGiftName.text = getGift(360- mDegree % 360)
                     val editor = sharedPref.edit()
                     val index = sharedPref.getInt(PREF_NAME, 0) + 1
                     editor.putInt(PREF_NAME, index)
@@ -102,30 +101,44 @@ class MainActivity : AppCompatActivity() {
             || (degrees > 72 && degrees <= 108)
             || (degrees > 144 && degrees <= 180)
             || (degrees > 216 && degrees <= 252)){
+            text = "Trật rồi! Tiếc quá!"
+            imGift.setImageResource(R.drawable.cbmmls)
             Log.d("uytai", "MM")
         }
         //card 50
         if(degrees > 36 && degrees <=72){
+            text = "WAOO!! Thẻ cào 50K"
+            imGift.setImageResource(R.drawable.card50)
             Log.d("uytai", "50")
         }
         //card 20
         if(degrees > 108 && degrees <=144){
+            text = "Thẻ cào 20K"
+            imGift.setImageResource(R.drawable.card20)
             Log.d("uytai", "20")
         }
         //card 10
         if(degrees > 180 && degrees <=216){
+            text = "Thẻ cào 10K"
+            imGift.setImageResource(R.drawable.card10)
             Log.d("uytai", "10")
         }
         //strongbow
         if(degrees > 252 && degrees <=288){
+            text = "1 ly Strongbow nhé!"
+            imGift.setImageResource(R.drawable.sb)
             Log.d("uytai", "SB")
         }
         //2BT
         if(degrees > 288 && degrees <=324){
+            text = "2 bịch bánh tráng luôn!"
+            imGift.setImageResource(R.drawable.bt2)
             Log.d("uytai", "2BT")
         }
         //1BT
         if(degrees > 324 && degrees <=360){
+            text = "1 bịch bánh tráng"
+            imGift.setImageResource(R.drawable.bt1)
             Log.d("uytai", "1BT")
         }
         return text
