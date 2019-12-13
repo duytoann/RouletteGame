@@ -18,18 +18,30 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private var PRIVATE_MODE = 0
-    private val PREF_NAME = "mindorks-welcome"
+    private val PREF_INDEX = "index"
+    private val PREF_FIRST_RUN = "first_run"
+    private val PREF_GIFT = "gift"
     private lateinit var mRandom: Random
     private var mDegree : Float = 0f
     private var mDegreeOld : Float = 0f
     private var tempDegree : Float = 0f
     private var valueOfSum: String = ""
-    private val caseOfGift: IntArray = intArrayOf(0, 0, 1, 4, 0, 0, 0, 0, 3, 3, 0, 3, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 5, 0, 0, 4, 0, 5, 0, 0, 3, 0, 4, 0, 3, 5, 0, 0, 0, 0, 0, 0, 1, 1, 0, 6, 2, 0, 2, 0, 0, 0, 1, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 3, 0, 0, 4, 0, 0, 0, 0, 4, 1, 1, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 6, 4, 1, 0, 0, 0, 4, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 5, 3, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 5, 0)
+    //private val caseOfGift: IntArray = intArrayOf(0, 0, 1, 4, 0, 0, 0, 0, 3, 3, 0, 3, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 5, 0, 0, 4, 0, 5, 0, 0, 3, 0, 4, 0, 3, 5, 0, 0, 0, 0, 0, 0, 1, 1, 0, 6, 2, 0, 2, 0, 0, 0, 1, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 3, 0, 0, 4, 0, 0, 0, 0, 4, 1, 1, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 6, 4, 1, 0, 0, 0, 4, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 5, 3, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 5, 0)
+    private var caseOfGift = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val sharedPref: SharedPreferences = getSharedPreferences(PREF_NAME, PRIVATE_MODE)
+        val sharedPref: SharedPreferences = getSharedPreferences(PREF_INDEX, PRIVATE_MODE)
+        // check initial mode
+        var isFirstRun = sharedPref.getBoolean(PREF_FIRST_RUN, true)
+        if(isFirstRun){
+            val editor = sharedPref.edit()
+            editor.putString(PREF_GIFT, generateArray())
+            editor.putBoolean(PREF_FIRST_RUN,false)
+            editor.apply()
+        }
+        caseOfGift = sharedPref.getString(PREF_GIFT,"").toString()
         mRandom = Random()
         btn_spin.setOnClickListener{
             //running
@@ -43,14 +55,14 @@ class MainActivity : AppCompatActivity() {
             //
             mDegreeOld = mDegree%360
             //speed of rotation
-            when(caseOfGift[sharedPref.getInt(PREF_NAME, 0)]){
-                0 -> tempDegree = 18f
-                1 -> tempDegree = 342f
-                2 -> tempDegree = 306f
-                3 -> tempDegree = 270f
-                4 -> tempDegree = 198f
-                5 -> tempDegree = 126f
-                6 -> tempDegree = 54f
+            when(caseOfGift[sharedPref.getInt(PREF_INDEX, 0)]){
+                '0' -> tempDegree = 18f
+                '1' -> tempDegree = 342f
+                '2' -> tempDegree = 306f
+                '3' -> tempDegree = 270f
+                '4' -> tempDegree = 198f
+                '5' -> tempDegree = 126f
+                '6' -> tempDegree = 54f
             }
             mDegree = (360-tempDegree + 2160)
             var mRotate = RotateAnimation(
@@ -72,8 +84,8 @@ class MainActivity : AppCompatActivity() {
                     imGift.visibility = View.VISIBLE
                     tvGiftName.text = getGift(360- mDegree % 360)
                     val editor = sharedPref.edit()
-                    val index = sharedPref.getInt(PREF_NAME, 0) + 1
-                    editor.putInt(PREF_NAME, index)
+                    val index = sharedPref.getInt(PREF_INDEX, 0) + 1
+                    editor.putInt(PREF_INDEX, index)
                     editor.apply()
                     //tvGiftName.text = currentNumber(360-mDegree % 360)
                     btn_spin.isClickable = true
@@ -87,9 +99,9 @@ class MainActivity : AppCompatActivity() {
         //clear pref
         imPointer.setOnLongClickListener{
             val editor = sharedPref.edit()
-            editor.putInt(PREF_NAME, 0)
+            editor.putInt(PREF_INDEX, 0)
             editor.apply()
-            Toast.makeText(this, sharedPref.getInt(PREF_NAME, -1).toString(), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, sharedPref.getInt(PREF_INDEX, -1).toString(), Toast.LENGTH_SHORT).show()
             true
         }
 
@@ -104,6 +116,29 @@ class MainActivity : AppCompatActivity() {
         //show/hidden edit text
     }
 
+    fun generateArray(): String{
+        var arr = mutableListOf<Int>()
+        for(i in 1..110){
+            arr.add(0)
+        }
+        for(i in 1..10)
+            arr.add(1)
+        for(i in 1..5)
+            arr.add(2)
+        for(i in 1..10)
+            arr.add(3)
+        for(i in 1..10)
+            arr.add(4)
+        for(i in 1..5)
+            arr.add(5)
+        for(i in 1..2)
+            arr.add(6)
+        arr.shuffle()
+        var result = ""
+        for(i in 0 until arr.size)
+            result+=arr.get(i)
+        return result
+    }
 
     fun getGift(degrees: Float) : String{
         Log.d("uytai", degrees.toString())

@@ -7,7 +7,9 @@ import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_admin.*
 
 class AdminActivity : AppCompatActivity() {
-
+    private val PREF_INDEX = "index"
+    private val PREF_GIFT = "gift"
+    private var caseOfGift = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin)
@@ -28,6 +30,10 @@ class AdminActivity : AppCompatActivity() {
         btn_reset.setOnClickListener {
             showDialog()
         }
+    }
+
+    fun getData(){
+
     }
 
     //show dialog

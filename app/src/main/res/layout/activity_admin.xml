@@ -65,6 +65,46 @@
             android:text="Còn lại"
             />
     </TableRow>
+    <!-- gia tri giai thuong -->
+    <TableRow
+        android:paddingTop="@dimen/_2sdp"
+        android:paddingBottom="@dimen/_2sdp"
+        android:background="@drawable/custom_cell"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_2sdp"
+            android:textSize="@dimen/_12sdp"
+            android:text="Giá trị giải thưởng"
+            />
+        <TextView
+            android:id="@+id/tv_sum_giai_thuong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_12sdp"
+            android:padding="@dimen/_2sdp"
+            android:text="10"
+            />
+        <TextView
+            android:id="@+id/tv_used_giai_thuong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_12sdp"
+            android:padding="@dimen/_2sdp"
+            android:text="2"
+            />
+        <TextView
+            android:id="@+id/tv_exist_giai_thuong"
+            android:textColor="#ff00"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_12sdp"
+            android:padding="@dimen/_2sdp"
+            android:text="8"
+            />
+    </TableRow>
 <!--   1 banh trang-->
     <TableRow
         android:paddingTop="@dimen/_2sdp"
@@ -196,7 +236,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_2sdp"
-            android:text="The cao 10k"
+            android:text="Thẻ cào 10k"
             />
         <TextView
             android:id="@+id/tv_sum_4"
@@ -236,7 +276,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_2sdp"
-            android:text="The cao 20k"
+            android:text="Thẻ cào 20k"
             />
         <TextView
             android:id="@+id/tv_sum_5"
@@ -276,7 +316,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_2sdp"
-            android:text="The cao 20k"
+            android:text="Thẻ cào 50k"
             />
         <TextView
             android:id="@+id/tv_sum_6"
