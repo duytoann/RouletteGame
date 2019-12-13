@@ -143,43 +143,4 @@ class MainActivity : AppCompatActivity() {
         }
         return text
     }
-
-    //
-    fun currentNumber( degrees: Float): String {
-
-        var text = ""
-        if(degrees<=45){
-            text = "Red"
-            imGift.setImageResource(R.drawable.red)
-        }
-        if(degrees > 45 && degrees <=90){
-            imGift.setImageResource(R.drawable.orange)
-            text = "Orange"
-        }
-        if(degrees > 90 && degrees <=135){
-            imGift.setImageResource(R.drawable.yellow)
-            text = "Yellow"
-        }
-        if(degrees > 135 && degrees <=180){
-            imGift.setImageResource(R.drawable.green)
-            text = "Green"
-        }
-        if(degrees > 180 && degrees <=225){
-            imGift.setImageResource(R.drawable.blue)
-            text = "Blue"
-        }
-        if(degrees > 225 && degrees <=270){
-            imGift.setImageResource(R.drawable.turquoise)
-            text = "Turquoise"
-        }
-        if(degrees > 270 && degrees <=315){
-            imGift.setImageResource(R.drawable.purple)
-            text = "Purple"
-        }
-        if(degrees > 315){
-            imGift.setImageResource(R.drawable.pink)
-            text = "Pink"
-        }
-        return text
-    }
 }
