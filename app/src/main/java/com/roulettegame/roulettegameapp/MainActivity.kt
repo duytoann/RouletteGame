@@ -1,9 +1,9 @@
 package com.roulettegame.roulettegameapp
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private var mDegree : Float = 0f
     private var mDegreeOld : Float = 0f
     private var tempDegree : Float = 0f
+    private var valueOfSum: String = ""
     private val caseOfGift: IntArray = intArrayOf(0, 0, 1, 4, 0, 0, 0, 0, 3, 3, 0, 3, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 5, 0, 0, 4, 0, 5, 0, 0, 3, 0, 4, 0, 3, 5, 0, 0, 0, 0, 0, 0, 1, 1, 0, 6, 2, 0, 2, 0, 0, 0, 1, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 3, 0, 0, 4, 0, 0, 0, 0, 4, 1, 1, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 6, 4, 1, 0, 0, 0, 4, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 5, 3, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 5, 0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                 5 -> tempDegree = 126f
                 6 -> tempDegree = 54f
             }
-            mDegree = (360-tempDegree + 1440)
+            mDegree = (360-tempDegree + 2160)
             var mRotate = RotateAnimation(
                 mDegreeOld, mDegree,
                 RotateAnimation.RELATIVE_TO_SELF, 0.5f,
@@ -91,7 +92,18 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, sharedPref.getInt(PREF_NAME, -1).toString(), Toast.LENGTH_SHORT).show()
             true
         }
+
+        //show/hidden edit text
+        btn_change_value.setOnLongClickListener{
+            val intent = Intent(this, AdminActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up)
+            true
+        }
+        //save value of sum
+        //show/hidden edit text
     }
+
 
     fun getGift(degrees: Float) : String{
         Log.d("uytai", degrees.toString())
