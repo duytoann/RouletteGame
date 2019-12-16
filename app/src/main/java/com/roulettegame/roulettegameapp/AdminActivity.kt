@@ -56,7 +56,6 @@ class AdminActivity : AppCompatActivity() {
     }
 
 
-
     private fun getData(){
         val sharedPref: SharedPreferences = getSharedPreferences(PREF_INDEX, PRIVATE_MODE)
         index = sharedPref.getInt(PREF_INDEX, 0)
@@ -110,7 +109,6 @@ class AdminActivity : AppCompatActivity() {
         tv_left_5.text = (totalCard20k-usedCard20k).toString()
         tv_left_6.text = (totalCard50k-usedCard50k).toString()
     }
-
 
 
     private fun getUsed(id: Char): Int{

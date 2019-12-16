@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private var tempDegree : Float = 0f
     private var initDegree : Float = 18f
     private var valueOfSum: String = ""
+    private var index =0
     //private val caseOfGift: IntArray = intArrayOf(0, 0, 1, 4, 0, 0, 0, 0, 3, 3, 0, 3, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 5, 0, 0, 4, 0, 5, 0, 0, 3, 0, 4, 0, 3, 5, 0, 0, 0, 0, 0, 0, 1, 1, 0, 6, 2, 0, 2, 0, 0, 0, 1, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 3, 0, 0, 4, 0, 0, 0, 0, 4, 1, 1, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 6, 4, 1, 0, 0, 0, 4, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 5, 3, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 5, 0)
     private var caseOfGift = ""
 
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val sharedPref: SharedPreferences = getSharedPreferences(PREF_INDEX, PRIVATE_MODE)
+        index = sharedPref.getInt(PREF_INDEX, 0)
         // check initial mode
         val isFirstRun = sharedPref.getBoolean(PREF_FIRST_RUN, true)
         if(isFirstRun){
@@ -58,7 +60,7 @@ class MainActivity : AppCompatActivity() {
             //
             mDegreeOld = mDegree%360
             //speed of rotation
-            when(caseOfGift[sharedPref.getInt(PREF_INDEX, 0)]){
+            when(caseOfGift[index]){
                 '0' -> tempDegree = 18f
                 '1' -> tempDegree = 342f
                 '2' -> tempDegree = 306f
@@ -87,7 +89,7 @@ class MainActivity : AppCompatActivity() {
                     imGift.visibility = View.VISIBLE
                     tvGiftName.text = getGift2(360- mDegree % 360)
                     val editor = sharedPref.edit()
-                    val index = sharedPref.getInt(PREF_INDEX, 0) + 1
+                    index = sharedPref.getInt(PREF_INDEX, 0) + 1
                     editor.putInt(PREF_INDEX, index)
                     editor.apply()
                     //tvGiftName.text = currentNumber(360-mDegree % 360)
@@ -119,9 +121,15 @@ class MainActivity : AppCompatActivity() {
             }, 1000)
             if(count==5){
                 val editor = sharedPref.edit()
-                editor.putInt(PREF_INDEX, 0)
-                editor.apply()
-                Toast.makeText(this, sharedPref.getInt(PREF_INDEX, -1).toString(), Toast.LENGTH_SHORT).show()
+                for(i in index until caseOfGift.length){
+                    if(caseOfGift[i] != '0'){
+                        index = i
+                        editor.putInt(PREF_INDEX, index)
+                        editor.apply()
+                        break
+                    }
+                }
+                Toast.makeText(this, ".", Toast.LENGTH_SHORT).show()
                 count = 0
             }
         }
