@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
 import android.view.animation.DecelerateInterpolator
@@ -34,6 +35,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //hidden status bar
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        //
         val sharedPref: SharedPreferences = getSharedPreferences(PREF_INDEX, PRIVATE_MODE)
         // check initial mode
         val isFirstRun = sharedPref.getBoolean(PREF_FIRST_RUN, true)
@@ -116,7 +120,7 @@ class MainActivity : AppCompatActivity() {
                 if(count < 5){
                     count=0
                 }
-            }, 1000)
+            }, 2000)
             if(count==5){
                 val editor = sharedPref.edit()
                 editor.putInt(PREF_INDEX, 0)
@@ -142,7 +146,7 @@ class MainActivity : AppCompatActivity() {
                 if(count2 < 5){
                     count2=0
                 }
-            }, 1000)
+            }, 2000)
             if (count2==5){
                 val intent = Intent(this, AdminActivity::class.java)
                 startActivity(intent)
