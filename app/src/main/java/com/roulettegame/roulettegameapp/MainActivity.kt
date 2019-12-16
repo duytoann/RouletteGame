@@ -1,9 +1,9 @@
 package com.roulettegame.roulettegameapp
 
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.os.Bundle
-import android.os.Handler
+import android.os.*
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -147,7 +147,14 @@ class MainActivity : AppCompatActivity() {
                         break
                     }
                 }
-                Toast.makeText(this, ".", Toast.LENGTH_SHORT).show()
+                val v = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+                // Vibrate for 500 milliseconds
+                // Vibrate for 500 milliseconds
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    v.vibrate(VibrationEffect.createOneShot(400, VibrationEffect.DEFAULT_AMPLITUDE))
+                } else { //deprecated in API 26
+                    v.vibrate(400)
+                }
                 count = 0
             }
         }
