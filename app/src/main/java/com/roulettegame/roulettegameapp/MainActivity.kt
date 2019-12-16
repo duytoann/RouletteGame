@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
             //running
             //disible button
             btn_spin.isClickable = false
+            btn_spin.setImageResource(R.drawable.button)
             //hidden gift image
             imGift.visibility = View.GONE
             //show watting gif
@@ -91,6 +92,7 @@ class MainActivity : AppCompatActivity() {
                     editor.apply()
                     //tvGiftName.text = currentNumber(360-mDegree % 360)
                     btn_spin.isClickable = true
+                    btn_spin.setImageResource(R.drawable.button2)
                 }
 
                 override fun onAnimationRepeat(animation: Animation) {}
