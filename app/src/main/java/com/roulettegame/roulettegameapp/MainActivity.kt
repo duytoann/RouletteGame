@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val sharedPref: SharedPreferences = getSharedPreferences(PREF_INDEX, PRIVATE_MODE)
         // check initial mode
-        var isFirstRun = sharedPref.getBoolean(PREF_FIRST_RUN, true)
+        val isFirstRun = sharedPref.getBoolean(PREF_FIRST_RUN, true)
         if(isFirstRun){
             val editor = sharedPref.edit()
             editor.putString(PREF_GIFT, generateArray())
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                 '6' -> tempDegree = 54f
             }
             mDegree = (360-tempDegree + 2160)
-            var mRotate = RotateAnimation(
+            val mRotate = RotateAnimation(
                 mDegreeOld, mDegree,
                 RotateAnimation.RELATIVE_TO_SELF, 0.5f,
                 RotateAnimation.RELATIVE_TO_SELF, 0.5f)
@@ -116,8 +116,8 @@ class MainActivity : AppCompatActivity() {
         //show/hidden edit text
     }
 
-    fun generateArray(): String{
-        var arr = mutableListOf<Int>()
+   private fun generateArray(): String{
+        val arr = mutableListOf<Int>()
         for(i in 1..110){
             arr.add(0)
         }
@@ -136,7 +136,7 @@ class MainActivity : AppCompatActivity() {
         arr.shuffle()
         var result = ""
         for(i in 0 until arr.size)
-            result+=arr.get(i)
+            result+= arr[i]
         return result
     }
 
