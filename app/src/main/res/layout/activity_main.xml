@@ -26,6 +26,7 @@
         android:textColor="#ff00"
         android:textSize="@dimen/_24sdp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent" />
