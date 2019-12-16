@@ -26,6 +26,7 @@
         android:textColor="#ff00"
         android:textSize="@dimen/_24sdp"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,7 +35,9 @@
         android:id="@+id/imRoulette"
         android:layout_width="@dimen/_140sdp"
         android:layout_height="@dimen/_140sdp"
+        android:layout_marginTop="16dp"
         android:scaleType="fitXY"
+        app:layout_constraintHorizontal_bias="0.472"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="@id/guideline3"
         app:layout_constraintTop_toBottomOf="@id/imPointer"
@@ -67,8 +70,8 @@
 
     <ImageView
         android:id="@+id/imGift"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_150sdp"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_200sdp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,8 +79,8 @@
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gimWaiting"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_150sdp"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_200sdp"
         android:visibility="invisible"
         android:src="@drawable/gift_waiting"
         android:scaleType="centerCrop"

@@ -116,9 +116,15 @@ class MainActivity : AppCompatActivity() {
         //show/hidden edit text
     }
 
+    override fun onResume() {
+        super.onResume()
+        val sharedPref: SharedPreferences = getSharedPreferences(PREF_INDEX, PRIVATE_MODE)
+        caseOfGift = sharedPref.getString(PREF_GIFT,"").toString()
+    }
+
    private fun generateArray(): String{
         val arr = mutableListOf<Int>()
-        for(i in 1..110){
+        for(i in 1..108){
             arr.add(0)
         }
         for(i in 1..10)
