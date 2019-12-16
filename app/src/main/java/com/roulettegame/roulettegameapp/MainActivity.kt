@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
             btn_spin.setImageResource(R.drawable.button)
             //hidden gift image
             imGift.visibility = View.GONE
+            gim_congras.visibility = View.GONE
             //show watting gif
             gimWaiting.visibility = View.VISIBLE
             tvGiftName.text = ""
@@ -253,7 +254,10 @@ class MainActivity : AppCompatActivity() {
         if(degrees==0f || degrees==72f || degrees==144f || degrees==216f || degrees==360f){
             text = "Trật rồi! Tiếc quá!"
             imGift.setImageResource(R.drawable.mm)
+            gim_congras.visibility = View.GONE
             Log.d("uytai", "MM")
+        }else{
+            gim_congras.visibility = View.VISIBLE
         }
         //card 50
         if(degrees == 36f){
