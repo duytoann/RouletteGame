@@ -149,43 +149,43 @@ class MainActivity : AppCompatActivity() {
             || (degrees > 144 && degrees <= 180)
             || (degrees > 216 && degrees <= 252)){
             text = "Trật rồi! Tiếc quá!"
-            imGift.setImageResource(R.drawable.cbmmls)
+            imGift.setImageResource(R.drawable.mm)
             Log.d("uytai", "MM")
         }
         //card 50
         if(degrees > 36 && degrees <=72){
             text = "WAOO!! Thẻ cào 50K"
-            imGift.setImageResource(R.drawable.card50)
+            imGift.setImageResource(R.drawable.the_50k)
             Log.d("uytai", "50")
         }
         //card 20
         if(degrees > 108 && degrees <=144){
             text = "Thẻ cào 20K"
-            imGift.setImageResource(R.drawable.card20)
+            imGift.setImageResource(R.drawable.the_20k)
             Log.d("uytai", "20")
         }
         //card 10
         if(degrees > 180 && degrees <=216){
             text = "Thẻ cào 10K"
-            imGift.setImageResource(R.drawable.card10)
+            imGift.setImageResource(R.drawable.the_10k)
             Log.d("uytai", "10")
         }
         //strongbow
         if(degrees > 252 && degrees <=288){
             text = "1 ly Strongbow nhé!"
-            imGift.setImageResource(R.drawable.sb)
+            imGift.setImageResource(R.drawable.strongbow)
             Log.d("uytai", "SB")
         }
         //2BT
         if(degrees > 288 && degrees <=324){
             text = "2 bịch bánh tráng luôn!"
-            imGift.setImageResource(R.drawable.bt2)
+            imGift.setImageResource(R.drawable.banh_trang_2)
             Log.d("uytai", "2BT")
         }
         //1BT
         if(degrees > 324 && degrees <=360){
             text = "1 bịch bánh tráng"
-            imGift.setImageResource(R.drawable.bt1)
+            imGift.setImageResource(R.drawable.banh_trang_1)
             Log.d("uytai", "1BT")
         }
         return text
