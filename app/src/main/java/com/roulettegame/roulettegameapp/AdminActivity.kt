@@ -40,17 +40,17 @@ class AdminActivity : AppCompatActivity() {
         }
         //reset
         btn_reset.setOnClickListener {
-            showDialog("Xác nhận reset ứng dụng", R.id.btn_reset)
+          //  showDialog("Xác nhận reset ứng dụng", R.id.btn_reset)
         }
         //add
         btn_add.setOnClickListener {
-            showDialog("Xác nhận thêm 250k vào giải thưởng", R.id.btn_add)
+         //   showDialog("Xác nhận thêm 250k vào giải thưởng", R.id.btn_add)
         }
         //minus
         btn_minus.setOnClickListener {
-            if(caseOfGift.length == 150 || caseOfGift.length-75 <= index)
-                Toast.makeText(this,"Không thể giảm phần thưởng",Toast.LENGTH_LONG).show()
-            else showDialog("Xác nhận giảm 250k vào giải thưởng", R.id.btn_minus)
+//            if(caseOfGift.length == 150 || caseOfGift.length-75 <= index)
+//                Toast.makeText(this,"Không thể giảm phần thưởng",Toast.LENGTH_LONG).show()
+//            else showDialog("Xác nhận giảm 250k vào giải thưởng", R.id.btn_minus)
         }
 
     }

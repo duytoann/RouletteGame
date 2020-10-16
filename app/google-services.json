@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "954859248823",
+    "firebase_url": "https://roulette-game-6f1c3.firebaseio.com",
+    "project_id": "roulette-game-6f1c3",
+    "storage_bucket": "roulette-game-6f1c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:954859248823:android:a75f9d166368c12aa30132",
+        "android_client_info": {
+          "package_name": "com.roulettegame.roulettegameapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "954859248823-ekrd6qf2q1ll8m54h5tetuimnvl63kos.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuVHuXCiB6V0ES4D_-UhvWBo8sg-z0OkM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "954859248823-ekrd6qf2q1ll8m54h5tetuimnvl63kos.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
