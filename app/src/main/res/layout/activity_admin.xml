@@ -161,7 +161,7 @@
             android:text="8"
             />
     </TableRow>
-
+    <!--   1 banh trang-->
     <TableRow
         android:paddingTop="@dimen/_2sdp"
         android:paddingBottom="@dimen/_2sdp"
@@ -172,47 +172,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/_2sdp"
             android:textSize="@dimen/_12sdp"
-            android:text="Dưỡng môi Vaserlin"
-            />
-        <TextView
-            android:id="@+id/tv_sum_0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/_12sdp"
-            android:padding="@dimen/_2sdp"
-            android:text="75"
-            />
-        <TextView
-            android:id="@+id/tv_used_0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/_12sdp"
-            android:padding="@dimen/_2sdp"
-            android:text="2"
-            />
-        <TextView
-            android:id="@+id/tv_left_0"
-            android:textColor="#ff00"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/_12sdp"
-            android:padding="@dimen/_2sdp"
-            android:text="73"
-            />
-    </TableRow>
-<!--   1 banh trang-->
-    <TableRow
-        android:paddingTop="@dimen/_2sdp"
-        android:paddingBottom="@dimen/_2sdp"
-        android:background="@drawable/custom_cell"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_2sdp"
-            android:textSize="@dimen/_12sdp"
-            android:text="Dao cạo chân mày"
+            android:text="1 Bánh tráng"
             />
         <TextView
             android:id="@+id/tv_sum_1"
@@ -220,7 +180,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_2sdp"
-            android:text="70"
+            android:text="10"
             />
         <TextView
             android:id="@+id/tv_used_1"
@@ -238,7 +198,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_2sdp"
-            android:text="138"
+            android:text="8"
             />
     </TableRow>
     <!--   2 banh trang-->
@@ -252,7 +212,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_2sdp"
-            android:text="Túi đựng mỹ phẩm"
+            android:text="2 Bánh tráng"
             />
         <TextView
             android:id="@+id/tv_sum_2"
@@ -260,7 +220,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_2sdp"
-            android:text="140"
+            android:text="5"
             />
         <TextView
             android:id="@+id/tv_used_2"
@@ -278,7 +238,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_2sdp"
-            android:text="58"
+            android:text="3"
             />
     </TableRow>
     <!--   1 ly strongbow-->
@@ -292,7 +252,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_2sdp"
-            android:text="Bông tẩy trang"
+            android:text="1 Ly Strongbow"
             />
         <TextView
             android:id="@+id/tv_sum_3"
@@ -300,7 +260,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_2sdp"
-            android:text="70"
+            android:text="10"
             />
         <TextView
             android:id="@+id/tv_used_3"
@@ -318,7 +278,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_2sdp"
-            android:text="68"
+            android:text="8"
             />
     </TableRow>
     <!--   the cao 10k-->
@@ -332,7 +292,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_2sdp"
-            android:text="Bộ cắt móng"
+            android:text="Thẻ cào 10k"
             />
         <TextView
             android:id="@+id/tv_sum_4"
@@ -340,7 +300,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_2sdp"
-            android:text="70"
+            android:text="10"
             />
         <TextView
             android:id="@+id/tv_used_4"
@@ -358,7 +318,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_2sdp"
-            android:text="68"
+            android:text="8"
             />
     </TableRow>
     <!--   the cao 20k-->
@@ -372,7 +332,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_2sdp"
-            android:text="Băng cài tóc"
+            android:text="Thẻ cào 20k"
             />
         <TextView
             android:id="@+id/tv_sum_5"
@@ -380,7 +340,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_2sdp"
-            android:text="70"
+            android:text="5"
             />
         <TextView
             android:id="@+id/tv_used_5"
@@ -412,7 +372,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_2sdp"
-            android:text="Thú bông"
+            android:text="Thẻ cào 50k"
             />
         <TextView
             android:id="@+id/tv_sum_6"
@@ -420,7 +380,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_2sdp"
-            android:text="5"
+            android:text="2"
             />
         <TextView
             android:id="@+id/tv_used_6"
@@ -438,7 +398,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_2sdp"
-            android:text="3"
+            android:text="0"
             />
     </TableRow>
 

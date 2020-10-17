@@ -15,9 +15,20 @@
                 android:gravity="center"
                 android:padding="@dimen/_4sdp"
                 android:text="Admin page"
+                android:layout_marginRight="@dimen/_2sdp"
                 android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
-
+            <TextView
+                android:id="@+id/tv_reset_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_2sdp"
+                android:background="@color/colorYellow"
+                android:padding="@dimen/_4sdp"
+                android:text="Reset"
+                android:textAlignment="center"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="italic|bold" />
             <TextView
                 android:id="@+id/tv_close_2"
                 android:layout_width="wrap_content"
@@ -107,7 +118,7 @@
                 android:textStyle="bold" />
         </TableRow>
 
-        <!--DƯỠNG MÔI VASERLINE 0-->
+        <!--DƯỠNG MÔI VASERLINE 1-->
         <TableRow
             android:background="@drawable/custom_cell"
             android:paddingTop="@dimen/_2sdp"
@@ -121,51 +132,11 @@
                 android:textSize="@dimen/_12sdp" />
 
             <TextView
-                android:id="@+id/tv_sum_0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_2sdp"
-                android:text="75"
-                android:textSize="@dimen/_12sdp" />
-
-            <TextView
-                android:id="@+id/tv_used_0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_2sdp"
-                android:text="0"
-                android:textSize="@dimen/_12sdp" />
-
-            <TextView
-                android:id="@+id/tv_left_0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_2sdp"
-                android:text="75"
-                android:textColor="#ff00"
-                android:textSize="@dimen/_12sdp"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <!--BÔNG TẨY TRANG - MẶT NẠ GIẤY 1-->
-        <TableRow
-            android:background="@drawable/custom_cell"
-            android:paddingTop="@dimen/_2sdp"
-            android:paddingBottom="@dimen/_2sdp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_2sdp"
-                android:text="Bông tẩy trang"
-                android:textSize="@dimen/_12sdp" />
-
-            <TextView
                 android:id="@+id/tv_sum_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"
-                android:text="70"
+                android:text="75"
                 android:textSize="@dimen/_12sdp" />
 
             <TextView
@@ -181,13 +152,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"
-                android:text="70"
+                android:text="75"
                 android:textColor="#ff00"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
         </TableRow>
 
-        <!--DAO CẠO CHÂN MÀY - MẶT NẠ GIẤY 2-->
+        <!--BÔNG TẨY TRANG - MẶT NẠ GIẤY 2-->
         <TableRow
             android:background="@drawable/custom_cell"
             android:paddingTop="@dimen/_2sdp"
@@ -197,7 +168,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"
-                android:text="Dao cạo chân mày"
+                android:text="Bông tẩy trang"
                 android:textSize="@dimen/_12sdp" />
 
             <TextView
@@ -205,7 +176,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"
-                android:text="60"
+                android:text="70"
                 android:textSize="@dimen/_12sdp" />
 
             <TextView
@@ -221,13 +192,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"
-                android:text="60"
+                android:text="70"
                 android:textColor="#ff00"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
         </TableRow>
 
-        <!-- BỘ CẮT MÓNG 3-->
+        <!--DAO CẠO CHÂN MÀY - MẶT NẠ GIẤY 3-->
         <TableRow
             android:background="@drawable/custom_cell"
             android:paddingTop="@dimen/_2sdp"
@@ -237,7 +208,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"
-                android:text="Bộ cắt móng"
+                android:text="Dao cạo chân mày"
                 android:textSize="@dimen/_12sdp" />
 
             <TextView
@@ -245,7 +216,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"
-                android:text="70"
+                android:text="60"
                 android:textSize="@dimen/_12sdp" />
 
             <TextView
@@ -261,13 +232,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"
-                android:text="70"
+                android:text="60"
                 android:textColor="#ff00"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
         </TableRow>
 
-        <!-- TÚI ĐỰNG MỸ PHẨM 4-->
+        <!-- BỘ CẮT MÓNG 4-->
         <TableRow
             android:background="@drawable/custom_cell"
             android:paddingTop="@dimen/_2sdp"
@@ -277,7 +248,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"
-                android:text="Túi đựng mỹ phẩm"
+                android:text="Bộ cắt móng"
                 android:textSize="@dimen/_12sdp" />
 
             <TextView
@@ -285,7 +256,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"
-                android:text="110"
+                android:text="70"
                 android:textSize="@dimen/_12sdp" />
 
             <TextView
@@ -301,23 +272,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"
-                android:text="110"
+                android:text="70"
                 android:textColor="#ff00"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
         </TableRow>
 
-        <!-- BĂNG VẢI CÀI TÓC 5-->
+        <!-- TÚI ĐỰNG MỸ PHẨM 5-->
         <TableRow
             android:background="@drawable/custom_cell"
-            android:paddingTop="@dimen/_4sdp"
-            android:paddingBottom="@dimen/_4sdp">
+            android:paddingTop="@dimen/_2sdp"
+            android:paddingBottom="@dimen/_2sdp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"
-                android:text="Băng cài tóc"
+                android:text="Túi đựng mỹ phẩm"
                 android:textSize="@dimen/_12sdp" />
 
             <TextView
@@ -325,7 +296,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"
-                android:text="50"
+                android:text="110"
                 android:textSize="@dimen/_12sdp" />
 
             <TextView
@@ -341,23 +312,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"
-                android:text="50"
+                android:text="110"
                 android:textColor="#ff00"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
         </TableRow>
 
-        <!-- VỚ 6-->
+        <!-- BĂNG VẢI CÀI TÓC 6-->
         <TableRow
             android:background="@drawable/custom_cell"
-            android:paddingTop="@dimen/_2sdp"
-            android:paddingBottom="@dimen/_2sdp">
+            android:paddingTop="@dimen/_4sdp"
+            android:paddingBottom="@dimen/_4sdp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"
-                android:text="Vớ"
+                android:text="Băng cài tóc"
                 android:textSize="@dimen/_12sdp" />
 
             <TextView
@@ -365,7 +336,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"
-                android:text="60"
+                android:text="50"
                 android:textSize="@dimen/_12sdp" />
 
             <TextView
@@ -381,13 +352,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"
-                android:text="60"
+                android:text="50"
                 android:textColor="#ff00"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
         </TableRow>
 
-        <!-- CHUỐI 7-->
+        <!-- VỚ 7-->
         <TableRow
             android:background="@drawable/custom_cell"
             android:paddingTop="@dimen/_2sdp"
@@ -397,7 +368,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"
-                android:text="Chuối"
+                android:text="Vớ"
                 android:textSize="@dimen/_12sdp" />
 
             <TextView
@@ -405,7 +376,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"
-                android:text="10"
+                android:text="60"
                 android:textSize="@dimen/_12sdp" />
 
             <TextView
@@ -421,13 +392,53 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"
+                android:text="60"
+                android:textColor="#ff00"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <!-- CHUỐI 8-->
+        <TableRow
+            android:background="@drawable/custom_cell"
+            android:paddingTop="@dimen/_2sdp"
+            android:paddingBottom="@dimen/_2sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_2sdp"
+                android:text="Chuối"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/tv_sum_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_2sdp"
+                android:text="10"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/tv_used_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_2sdp"
+                android:text="0"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/tv_left_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_2sdp"
                 android:text="10"
                 android:textColor="#ff00"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
         </TableRow>
 
-        <!-- DOVE 8-->
+        <!-- DOVE 9-->
         <TableRow
             android:background="@drawable/custom_cell"
             android:paddingTop="@dimen/_2sdp"
@@ -441,7 +452,7 @@
                 android:textSize="@dimen/_12sdp" />
 
             <TextView
-                android:id="@+id/tv_sum_8"
+                android:id="@+id/tv_sum_9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"
@@ -449,7 +460,7 @@
                 android:textSize="@dimen/_12sdp" />
 
             <TextView
-                android:id="@+id/tv_used_8"
+                android:id="@+id/tv_used_9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"
@@ -457,7 +468,7 @@
                 android:textSize="@dimen/_12sdp" />
 
             <TextView
-                android:id="@+id/tv_left_8"
+                android:id="@+id/tv_left_9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_2sdp"

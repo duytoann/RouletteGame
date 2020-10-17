@@ -1,20 +1,32 @@
 package com.roulettegame.roulettegameapp
 
+import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.graphics.Typeface
+import android.graphics.drawable.ColorDrawable
+import android.inputmethodservice.Keyboard
+import android.opengl.Visibility
 import android.os.*
 import android.util.Log
+import android.view.Gravity
+import android.view.KeyboardShortcutInfo
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.RotateAnimation
-import android.widget.Toast
+import android.view.inputmethod.InputMethodManager
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.eemployee_dialog.*
 import java.util.*
 
 
@@ -28,11 +40,11 @@ class MainActivity : AppCompatActivity() {
     private var mDegree: Float = 0f
     private var mDegreeOld: Float = 0f
     private var tempDegree: Float = 0f
-//    private var initDegree: Float = 18f
     private var initDegree: Float = 0f
     private var valueOfSum: String = ""
     private var index = 0
     private var caseOfGift = ""
+    private var employee: Employee = Employee()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +69,8 @@ class MainActivity : AppCompatActivity() {
         caseOfGift = sharedPref.getString(PREF_GIFT, "").toString()
         mRandom = Random()
         btn_spin.setOnClickListener {
+            show_greeting_quote.visibility = View.GONE
+            btn_spin.visibility = View.GONE
             //check out of gift
             if (index >= caseOfGift.length) {
                 Toast.makeText(
@@ -80,13 +94,15 @@ class MainActivity : AppCompatActivity() {
                 //speed of rotation
                 when (caseOfGift[index]) {
                     '0' -> tempDegree = 0f
-                    '1' -> tempDegree = 45f
-                    '2' -> tempDegree = 90f
-                    '3' -> tempDegree = 135f
-                    '4' -> tempDegree = 180f
-                    '5' -> tempDegree = 225f
-                    '6' -> tempDegree = 270f
-                    '7' -> tempDegree = 315f
+                    '1' -> tempDegree = 36f
+                    '2' -> tempDegree = 72f
+                    '3' -> tempDegree = 108f
+                    '4' -> tempDegree = 144f
+                    '5' -> tempDegree = 180f
+                    '6' -> tempDegree = 216f
+                    '7' -> tempDegree = 252f
+                    '8' -> tempDegree = 288f
+                    '9' -> tempDegree = 324f
                 }
                 mDegree = (360 - (tempDegree - initDegree) + 2160)
                 val mRotate = RotateAnimation(
@@ -168,7 +184,107 @@ class MainActivity : AppCompatActivity() {
                 count2 = 0
             }
         }
+        btn_add_gen_id.setOnClickListener {
+            show_greeting_quote.visibility = View.GONE
+            tvGiftName.visibility = View.GONE
+            imGift.visibility = View.GONE
+            gim_congras.visibility = View.GONE
+            count2++
+            Handler().postDelayed({
+                if (count2 < 5) {
+                    count2 = 0
+                }
+            }, 2000)
+            if (count2 == 2) {
 
+                var dialog = Dialog(this)
+                dialog.setContentView(R.layout.eemployee_dialog)
+                dialog.setCanceledOnTouchOutside(false)
+                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialog.show()
+
+                var btnCancel = dialog.findViewById<Button>(R.id.btn_dialog_cancel)
+                var btnClose = dialog.findViewById<ImageButton>(R.id.btn_dialog_imgcancel)
+                var btnSend = dialog.findViewById<Button>(R.id.btn_dialog_send)
+                var edGenId = dialog.findViewById<EditText>(R.id.ed_gen_id)
+
+                edGenId.gravity = Gravity.CENTER_HORIZONTAL
+
+                btnSend.setOnClickListener {
+
+                    var genId = edGenId.text.toString()
+
+
+//                    Toast.makeText(this, "Clicked! clicked! clicked!", Toast.LENGTH_SHORT)
+//                        .show()
+//                    Log.d("SEND", "Clicked! clicked! clicked!")
+//                    Log.d("GEN_ID: ", edGenId.text.toString())
+
+                    if (genId.length == 8) {
+                        employee = getDataFromFirebase(edGenId.text.toString())
+                        dialog.dismiss()
+                    } else {
+                        Toast.makeText(this, "Mã nhân viên chưa được nhập đủ!", Toast.LENGTH_SHORT)
+                    }
+                }
+
+                btnCancel.setOnClickListener {
+                    dialog.dismiss()
+                }
+                btnClose.setOnClickListener {
+                    dialog.dismiss()
+                }
+
+                count2 = 0
+            }
+        }
+        if (employee.name != "")
+            show_greeting_quote.text =
+                "Chào bạn " + employee.name + ", chúc bạn một ngày Phụ nữ Việt Nam thật vui và ý nghĩa"
+
+//        //Get Firebase Instance
+//        var database: FirebaseDatabase = FirebaseDatabase.getInstance()
+////        database.goOffline()
+//
+//        //todo ok
+//        var empReference2: DatabaseReference = database.getReference("employee")
+//
+//        //todo ok
+//        val query = empReference2.orderByChild("genid").equalTo("10592215")
+//        query.addChildEventListener(object : ChildEventListener {
+//            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+//                val id = snapshot.key
+//
+//                val emp = snapshot.getValue(Employee::class.java)
+//                Log.d("TOAN22222", emp.toString() + "\n id: $id")
+//                //sau khi quay
+//                emp?.status = "1"
+//                empReference2.child(id!!).setValue(emp)
+//            }
+//
+//            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+//                TODO("Not yet implemented")
+//            }
+//
+//            override fun onChildRemoved(snapshot: DataSnapshot) {
+//                TODO("Not yet implemented")
+//            }
+//
+//            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+//                TODO("Not yet implemented")
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                TODO("Not yet implemented")
+//            }
+//        })
+//
+//        Log.d("TOAN", "BEGIN")
+//        empReference2.addChildEventListener(childEventListener)
+    }
+
+    fun getDataFromFirebase(genId: String): Employee {
+        var employee: Employee = Employee()
         //Get Firebase Instance
         var database: FirebaseDatabase = FirebaseDatabase.getInstance()
 //        database.goOffline()
@@ -177,37 +293,50 @@ class MainActivity : AppCompatActivity() {
         var empReference2: DatabaseReference = database.getReference("employee")
 
         //todo ok
-        val query = empReference2.orderByChild("genid").equalTo("10592215")
+        val query = empReference2.orderByChild("genid").equalTo(genId)
+//        val query = empReference2.orderByChild("genid").equalTo("15842289")
         query.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val id = snapshot.key
 
                 val emp = snapshot.getValue(Employee::class.java)
+                if (emp != null) {
+//                   var map : Map<String, Objects> = emp as Map<String, Objects>
+                    var no: String = emp.no
+                    var genid: String = emp.genid
+                    var name: String = emp.fullname
+                    var lastname: String = emp.name
+                    var status: String = emp.status
+                    employee = Employee(no, genid, name, lastname, status)
+
+                    updateGreetingQuote(employee)
+                }
+
+
+
                 Log.d("TOAN22222", emp.toString() + "\n id: $id")
                 //sau khi quay
                 emp?.status = "1"
+
                 empReference2.child(id!!).setValue(emp)
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                TODO("Not yet implemented")
             }
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
-                TODO("Not yet implemented")
             }
 
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-                TODO("Not yet implemented")
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
         })
 
         Log.d("TOAN", "BEGIN")
         empReference2.addChildEventListener(childEventListener)
+        return employee
     }
 
     private val childEventListener = object : ChildEventListener {
@@ -231,6 +360,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun styleForTextView(view: TextView, fontName: String){
+//        var typeFace: Typeface = Typeface.createFromAsset(assets, "UTM Androgyne.ttf")
+        var typeFace: Typeface = Typeface.createFromAsset(assets, fontName)
+        view.typeface = typeFace
+    }
+
+    private fun updateGreetingQuote(employee: Employee) {
+        if (employee.status.toInt() == 0) btn_spin.visibility = View.VISIBLE
+//        var typeFace: Typeface = Typeface.createFromAsset(assets, "UTM Androgyne.ttf")
+//        show_greeting_quote.typeface = typeFace
+        styleForTextView(show_greeting_quote, "UTM Androgyne.ttf")
+        show_greeting_quote.text =
+            "Chào bạn \"" + employee.name + "\",\nChúc bạn một ngày Phụ nữ Việt Nam\n thật vui và ý nghĩa"
+        show_greeting_quote.visibility = View.VISIBLE
+    }
+
     override fun onResume() {
         super.onResume()
         val sharedPref: SharedPreferences = getSharedPreferences(PREF_INDEX, PRIVATE_MODE)
@@ -240,22 +385,38 @@ class MainActivity : AppCompatActivity() {
     private fun generateArray(): String {
         val arr = mutableListOf<Int>()
         // tổng số lượt quay
-        for (i in 1..872) {
+        for (i in 1..10) {
             arr.add(0)
         }
 
-        for (i in 1..70)
+        /// VASERLIN
+        for (i in 1..75)
             arr.add(1)
-        for (i in 1..60)
+        /// BÔNG TẨY TRANG
+        for (i in 1..70)
             arr.add(2)
-        for (i in 1..10)
+        /// DAO CAO RÂU
+        for (i in 1..60)
             arr.add(3)
+        /// BỘ CẮT MÓNG
         for (i in 1..70)
             arr.add(4)
-        for (i in 1..50)
+        /// TÚI ĐỰNG
+        for (i in 1..110)
             arr.add(5)
-        for (i in 1..60)
+        /// BĂNG VẢI CÀI TÓC
+        for (i in 1..50)
             arr.add(6)
+        /// VỚ
+        for (i in 1..60)
+            arr.add(7)
+        /// CHUỐI
+        for (i in 1..10)
+            arr.add(8)
+        /// DOVE
+        for (i in 1..40)
+            arr.add(9)
+
         arr.shuffle()
         var result = ""
         for (i in 0 until arr.size)
@@ -316,53 +477,103 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getGift2(degrees: Float): String {
-        Log.d("uytai", degrees.toString())
+
+        Log.d("ndt", degrees.toString())
         var text = ""
-        //no gift
+        styleForTextView(tvGiftName, "UTM Androgyne.ttf")
+
+        //0. no gift
         if (degrees == 0f || degrees == 360f) {
             text = "Chúc bạn may mắn lần sau!"
             imGift.setImageResource(R.drawable.mm)
             gim_congras.visibility = View.GONE
-            Log.d("uytai", "MM")
+            tvGiftName.visibility = View.GONE
+            Log.d("ndt", "MM")
         } else {
             gim_congras.visibility = View.VISIBLE
         }
-        if (degrees == 45f) {
-            text = "Bộ cắt móng"
-            imGift.setImageResource(R.drawable.bocatmong)
-            Log.d("uytai", "cắt móng")
+        // 1. vaserlin
+        if (degrees == 36f) {
+            text = "Dưỡng môi Vaserlin"
+            imGift.setImageResource(R.drawable.vaserlin)
+            tvGiftName.text = "SEHC thân gửi bạn " + employee.name + " phần quà " + text
+            tvGiftName.visibility = View.VISIBLE
+            Log.d("ndt", "Vaserlin")
         }
-        if (degrees == 90f) {
-            text = "Dao cạo chân mày"
-            imGift.setImageResource(R.drawable.daocao)
-            Log.d("uytai", "dao cạo chân mày")
-        }
-        if (degrees == 135f) {
-            text = "Thú bông!"
-            imGift.setImageResource(R.drawable.chuoi)
-            Log.d("uytai", "Chuối")
-        }
-        if (degrees == 180f) {
+
+        // 2. Bông tẩy trang
+        if (degrees == 72f) {
             text = "Bông tẩy trang"
             imGift.setImageResource(R.drawable.bongtaytrang)
-            Log.d("uytai", "Bông tẩy trang")
+            tvGiftName.text = "SEHC thân gửi bạn " + employee.name + " phần quà " + text
+            tvGiftName.visibility = View.VISIBLE
+            Log.d("ndt", "Bông tẩy trang")
         }
-        if (degrees == 225f) {
-            text = "Băng cài tóc"
-            imGift.setImageResource(R.drawable.caitoc)
-            Log.d("uytai", "Cài tóc")
+
+        // 3. Dao cạo chân mày
+        if (degrees == 108f) {
+            text = "Dao cạo chân mày"
+            imGift.setImageResource(R.drawable.daocao)
+            tvGiftName.text = "SEHC thân gửi bạn " + employee.name + " phần quà " + text
+            tvGiftName.visibility = View.VISIBLE
+            Log.d("ndt", "Dao cạo chân mày")
         }
-        if (degrees == 270f) {
-            text = "Bộ dưỡng môi Vaserlin"
-            imGift.setImageResource(R.drawable.vaserlin)
-            Log.d("uytai", "Varserlin")
+
+        // 4. Bộ cắt móng
+        if (degrees == 144f) {
+            text = "Bộ cắt móng"
+            imGift.setImageResource(R.drawable.bocatmong)
+            tvGiftName.text = "SEHC thân gửi bạn " + employee.name + " phần quà " + text
+            tvGiftName.visibility = View.VISIBLE
+            Log.d("ndt", "Bộ cắt móng")
         }
-        if (degrees == 315f) {
+
+        // 5. Túi đựng mỹ phẩm
+        if (degrees == 180f) {
             text = "Túi đựng mỹ phẩm"
             imGift.setImageResource(R.drawable.tuidung)
-            Log.d("uytai", "Túi đựng")
+            tvGiftName.text = "SEHC thân gửi bạn " + employee.name + " phần quà " + text
+            tvGiftName.visibility = View.VISIBLE
+            Log.d("ndt", "Túi đựng mỹ phẩm")
         }
-        return text
+
+        // 6. Băng vải cài tóc
+        if (degrees == 216f) {
+            text = "Băng vải cài tóc"
+            imGift.setImageResource(R.drawable.vaserlin)
+            tvGiftName.text = "SEHC thân gửi bạn " + employee.name + " phần quà " + text
+            tvGiftName.visibility = View.VISIBLE
+            Log.d("ndt", "Băng vải cài tóc")
+        }
+
+        // 7. Vớ
+        if (degrees == 252f) {
+            text = "Vớ"
+            imGift.setImageResource(R.drawable.vo)
+            tvGiftName.text = "SEHC thân gửi bạn " + employee.name + " phần quà " + text
+            tvGiftName.visibility = View.VISIBLE
+            Log.d("ndt", "Vớ")
+        }
+
+        // 8. Chuối
+        if (degrees == 288f) {
+            text = "Chuối"
+            imGift.setImageResource(R.drawable.chuoi)
+            tvGiftName.text = "SEHC thân gửi bạn " + employee.name + " phần quà " + text
+            tvGiftName.visibility = View.VISIBLE
+            Log.d("ndt", "Chuối")
+        }
+
+        // 9. Dove
+        if (degrees == 324f) {
+            text = "Dove"
+            imGift.setImageResource(R.drawable.dove)
+            tvGiftName.text = "SEHC thân gửi bạn " + employee.name + " phần quà " + text
+            tvGiftName.visibility = View.VISIBLE
+            Log.d("ndt", "Dove")
+        }
+        return tvGiftName.text.toString()
     }
+
 
 }
