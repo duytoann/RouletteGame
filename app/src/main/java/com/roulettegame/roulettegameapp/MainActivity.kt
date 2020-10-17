@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
     private var index = 0
     private var caseOfGift = ""
     private var employee: Employee = Employee()
-
+    val specialWoman: Map<String, String> = mutableMapOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +71,19 @@ class MainActivity : AppCompatActivity() {
         btn_spin.setOnClickListener {
             show_greeting_quote.visibility = View.GONE
             btn_spin.visibility = View.GONE
+
+            if (employee.genid == "15842289") {
+                val editor = sharedPref.edit()
+                for (i in index until caseOfGift.length) {
+                    if (caseOfGift[i] == '8') {
+                        index = i
+                        editor.putInt(PREF_INDEX, index)
+                        editor.apply()
+                        break
+                    }
+                }
+            }
+
             //check out of gift
             if (index >= caseOfGift.length) {
                 Toast.makeText(
@@ -284,7 +297,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getDataFromFirebase(genId: String): Employee {
-        var employee: Employee = Employee()
+//        var employee: Employee = Employee()
         //Get Firebase Instance
         var database: FirebaseDatabase = FirebaseDatabase.getInstance()
 //        database.goOffline()
@@ -294,7 +307,7 @@ class MainActivity : AppCompatActivity() {
 
         //todo ok
         val query = empReference2.orderByChild("genid").equalTo(genId)
-//        val query = empReference2.orderByChild("genid").equalTo("15842289")
+        //  val query = empReference2.orderByChild("genid").equalTo("19521724")
         query.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val id = snapshot.key
@@ -312,11 +325,9 @@ class MainActivity : AppCompatActivity() {
                     updateGreetingQuote(employee)
                 }
 
-
-
                 Log.d("TOAN22222", emp.toString() + "\n id: $id")
                 //sau khi quay
-                emp?.status = "1"
+                emp?.status = "0"
 
                 empReference2.child(id!!).setValue(emp)
             }
@@ -331,6 +342,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
+                Log.d("TOAN", " - CANCELLED")
             }
         })
 
@@ -360,7 +372,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun styleForTextView(view: TextView, fontName: String){
+    private fun styleForTextView(view: TextView, fontName: String) {
 //        var typeFace: Typeface = Typeface.createFromAsset(assets, "UTM Androgyne.ttf")
         var typeFace: Typeface = Typeface.createFromAsset(assets, fontName)
         view.typeface = typeFace
@@ -371,9 +383,18 @@ class MainActivity : AppCompatActivity() {
 //        var typeFace: Typeface = Typeface.createFromAsset(assets, "UTM Androgyne.ttf")
 //        show_greeting_quote.typeface = typeFace
         styleForTextView(show_greeting_quote, "UTM Androgyne.ttf")
+//        var firstChar: Char = employee.name.first()
+//        when(firstChar){
+//            'A' ->
+//        }
         show_greeting_quote.text =
             "Chào bạn \"" + employee.name + "\",\nChúc bạn một ngày Phụ nữ Việt Nam\n thật vui và ý nghĩa"
         show_greeting_quote.visibility = View.VISIBLE
+
+    }
+
+    private fun updateEmployee() {
+
     }
 
     override fun onResume() {
@@ -487,7 +508,8 @@ class MainActivity : AppCompatActivity() {
             text = "Chúc bạn may mắn lần sau!"
             imGift.setImageResource(R.drawable.mm)
             gim_congras.visibility = View.GONE
-            tvGiftName.visibility = View.GONE
+            tvGiftName.text = "Ui, trật mất rồi!"
+            tvGiftName.visibility = View.VISIBLE
             Log.d("ndt", "MM")
         } else {
             gim_congras.visibility = View.VISIBLE
