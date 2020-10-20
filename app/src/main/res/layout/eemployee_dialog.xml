@@ -28,7 +28,7 @@
             android:layout_below="@id/ed_gen_id"
             android:orientation="horizontal">
             <Button
-                android:id="@+id/btn_dialog_cancel"
+                android:id="@+id/btn_dialog_reset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -36,7 +36,7 @@
                 android:layout_marginRight="20dp"
                 android:background="@drawable/round_cancle_btn"
                 android:textColor="@color/colorWhite"
-                android:text="Hủy"/>
+                android:text="Đặt lại"/>
             <Button android:id="@+id/btn_dialog_send"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/round_send_btn"
                 android:textColor="@color/colorWhite"
-                android:text="Gửi"/>
+                android:text="Thêm GenId"/>
         </LinearLayout>
     </RelativeLayout>
 

@@ -15,24 +15,24 @@ class AdminActivity2 : AppCompatActivity() {
     private var index = 0
 
     // TỔNG SỐ PHẦN QUÀ
-    private var totalOfGift = 0
     private var totalOfVaserlin = 0
     private var totalOfBongTayTrang = 0
     private var totalOfDaoCaoChanMay = 0
     private var totalOfBoCatMong = 0
     private var totalOfTuiDung = 0
+    private var totalOfTuiDung1 = 0
     private var totalOfBangVaiCaiToc = 0
     private var totalOfVo = 0
     private var totalOfChuoi = 0
     private var totalOfDove = 0
 
     // PHẦN QUÀ ĐÃ SỬ DỤNG
-    private var usedOfGift = 0
     private var usedOfVaserlin = 0
     private var usedOfBongTayTrang = 0
     private var usedOfDaoCaoChanMay = 0
     private var usedOfBoCatMong = 0
     private var usedOfTuiDung = 0
+    private var usedOfTuiDung1 = 0
     private var usedOfBangVaiCaiToc = 0
     private var usedOfVo = 0
     private var usedOfChuoi = 0
@@ -64,33 +64,10 @@ class AdminActivity2 : AppCompatActivity() {
     }
 
     private fun getUsed(id: Char): Int{
-        if(index == 0)
-            return 0
         var used = 0
         for(i in 0 until index){
             if(caseOfGift[i] == id)
                 used++
-        }
-        return used
-    }
-
-    private fun getUsedGiaiThuong(): Int{
-        if(index == 0)
-            return 0
-        var used = 0
-        for(i in 0 until index){
-            when(caseOfGift[i]){
-                '0' -> used+= 0
-                '1' -> used+= 1
-                '2' -> used+= 1
-                '3' -> used+= 1
-                '4' -> used+= 1
-                '5' -> used+= 1
-                '6' -> used+= 1
-                '7' -> used+= 1
-                '8' -> used+= 1
-                '9' -> used+= 1
-            }
         }
         return used
     }
@@ -106,6 +83,7 @@ class AdminActivity2 : AppCompatActivity() {
         caseOfGift = sharedPref.getString(PREF_GIFT,"").toString()
 
         /// TOTAL GIFT
+        totalOfTuiDung1 = getTotal('0')
         totalOfVaserlin = getTotal('1')
         totalOfBongTayTrang = getTotal('2')
         totalOfDaoCaoChanMay = getTotal('3')
@@ -117,6 +95,7 @@ class AdminActivity2 : AppCompatActivity() {
         totalOfDove = getTotal('9')
 
         /// USED
+        usedOfTuiDung1 = getUsed('0')
         usedOfVaserlin = getUsed('1')
         usedOfBongTayTrang = getUsed('2')
         usedOfDaoCaoChanMay = getUsed('3')
@@ -128,7 +107,6 @@ class AdminActivity2 : AppCompatActivity() {
         usedOfDove = getUsed('9')
 
         // SET TOTAL
-        tv_sum_quay_2.text = caseOfGift.length.toString()
         tv_sum_1.text = totalOfVaserlin.toString()
         tv_sum_2.text = totalOfBongTayTrang.toString()
         tv_sum_3.text = totalOfDaoCaoChanMay.toString()
@@ -144,18 +122,18 @@ class AdminActivity2 : AppCompatActivity() {
         tv_used_2.text = usedOfBongTayTrang.toString()
         tv_used_3.text = usedOfDaoCaoChanMay.toString()
         tv_used_4.text = usedOfBoCatMong.toString()
-        tv_used_5.text = usedOfTuiDung.toString()
+        tv_used_5.text = (usedOfTuiDung + usedOfTuiDung1).toString()
         tv_used_6.text = usedOfBangVaiCaiToc.toString()
         tv_used_7.text = usedOfVo.toString()
         tv_used_8.text = usedOfChuoi.toString()
         tv_used_9.text = usedOfDove.toString()
 
         // SET LEFT
-        tv_left_1.text = (totalOfVaserlin -usedOfVaserlin).toString()
+        tv_left_1.text = (totalOfVaserlin - usedOfVaserlin).toString()
         tv_left_2.text = (totalOfBongTayTrang - usedOfBongTayTrang).toString()
         tv_left_3.text = (totalOfDaoCaoChanMay -usedOfDaoCaoChanMay).toString()
         tv_left_4.text = (totalOfBoCatMong - usedOfBoCatMong).toString()
-        tv_left_5.text = (totalOfTuiDung - usedOfTuiDung).toString()
+        tv_left_5.text = (totalOfTuiDung - usedOfTuiDung - usedOfTuiDung1).toString()
         tv_left_6.text = (totalOfBangVaiCaiToc - usedOfBangVaiCaiToc).toString()
         tv_left_7.text = (totalOfVo - usedOfVo).toString()
         tv_left_8.text = (totalOfChuoi - usedOfChuoi).toString()
@@ -175,36 +153,39 @@ class AdminActivity2 : AppCompatActivity() {
     private fun generateAmountOfGift() : String{
         val arr = mutableListOf<Int>()
         // TỔNG SỐ LƯỢT QUAY
-        for (i in 1..872) {
-            arr.add(0)
-        }
+//        for (i in 0..0) {
+//            arr.add(0)
+//        }
 
+        // tổng số lượt quay
+        for (i in 1..35)
+            arr.add(0)
         /// VASERLIN
-        for (i in 1..75)
+        for (i in 1..50)
             arr.add(1)
         /// BÔNG TẨY TRANG
-        for (i in 1..70)
+        for (i in 1..43)
             arr.add(2)
         /// DAO CAO RÂU
-        for (i in 1..60)
+        for (i in 1..40)
             arr.add(3)
         /// BỘ CẮT MÓNG
-        for (i in 1..70)
+        for (i in 1..50)
             arr.add(4)
         /// TÚI ĐỰNG
-        for (i in 1..110)
+        for (i in 1..35)
             arr.add(5)
         /// BĂNG VẢI CÀI TÓC
-        for (i in 1..50)
+        for (i in 1..30)
             arr.add(6)
         /// VỚ
-        for (i in 1..60)
+        for (i in 1..40)
             arr.add(7)
         /// CHUỐI
-        for (i in 1..10)
+        for (i in 1..7)
             arr.add(8)
         /// DOVE
-        for (i in 1..40)
+        for (i in 1..30)
             arr.add(9)
 
         arr.shuffle()

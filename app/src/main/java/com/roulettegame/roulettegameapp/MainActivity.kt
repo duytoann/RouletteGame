@@ -1,32 +1,25 @@
 package com.roulettegame.roulettegameapp
 
-import android.app.Activity
 import android.app.Dialog
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
-import android.inputmethodservice.Keyboard
-import android.opengl.Visibility
-import android.os.*
+import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.Gravity
-import android.view.KeyboardShortcutInfo
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.RotateAnimation
-import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.eemployee_dialog.*
 import java.util.*
 
 
@@ -45,8 +38,9 @@ class MainActivity : AppCompatActivity() {
     private var index = 0
     private var caseOfGift = ""
     private var employee: Employee = Employee()
-    val specialWoman: Map<String, String> = mutableMapOf()
-
+    private val specialWoman =
+        mapOf("19541230" to '8', "19544453" to '8', "15802499" to '8', "19539711" to '9')
+    private val arr = mutableListOf<Int>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -65,24 +59,47 @@ class MainActivity : AppCompatActivity() {
             editor.putString(PREF_GIFT, generateArray())
             editor.putBoolean(PREF_FIRST_RUN, false)
             editor.apply()
+        } else {
+            caseOfGift = sharedPref.getString(PREF_GIFT, "").toString()
+            regenerateArray(caseOfGift)
         }
-        caseOfGift = sharedPref.getString(PREF_GIFT, "").toString()
+
         mRandom = Random()
         btn_spin.setOnClickListener {
             show_greeting_quote.visibility = View.GONE
             btn_spin.visibility = View.GONE
 
-            if (employee.genid == "15842289") {
-                val editor = sharedPref.edit()
-                for (i in index until caseOfGift.length) {
-                    if (caseOfGift[i] == '8') {
-                        index = i
-                        editor.putInt(PREF_INDEX, index)
-                        editor.apply()
-                        break
-                    }
-                }
-            }
+//            specialWoman.forEach { (k, v) ->
+//                if (employee.genid == k) {
+//                    val editor = sharedPref.edit()
+//                    for (i in index until caseOfGift.length) {
+//                        Log.d("CASE OF GIFT LENGTH: ", caseOfGift[index].toString() + " - i: " + i)
+//                        if (caseOfGift[i] == v) {
+//                            var temp = arr[index]
+//                            arr[index] = v.toInt()
+//                            arr[i] = temp
+//
+////                            editor.putInt(PREF_INDEX, index)
+////                            editor.apply()
+//                            Log.d("CASE OF GIFT: ", caseOfGift[i].toString() + " - i: " + i)
+//                            break
+//                        }
+//                    }
+//                }
+//            }
+
+//            if (employee.genid == "") {
+//                val editor = sharedPref.edit()
+//                for (i in index until caseOfGift.length) {
+//                    if (caseOfGift[i] == '8') {
+//                        index = i
+//
+//                        editor.putInt(PREF_INDEX, index)
+//                        editor.apply()
+//                        break
+//                    }
+//                }
+//            }
 
             //check out of gift
             if (index >= caseOfGift.length) {
@@ -153,34 +170,34 @@ class MainActivity : AppCompatActivity() {
         }
 
         var count = 0
-        imPointer.setOnClickListener {
-            count++
-            Handler().postDelayed({
-                if (count < 5) {
-                    count = 0
-                }
-            }, 2000)
-            if (count == 5) {
-                val editor = sharedPref.edit()
-                for (i in index until caseOfGift.length) {
-                    if (caseOfGift[i] != '0') {
-                        index = i
-                        editor.putInt(PREF_INDEX, index)
-                        editor.apply()
-                        break
-                    }
-                }
-                val v = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-                // Vibrate for 500 milliseconds
-                // Vibrate for 500 milliseconds
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    v.vibrate(VibrationEffect.createOneShot(400, VibrationEffect.DEFAULT_AMPLITUDE))
-                } else { //deprecated in API 26
-                    v.vibrate(400)
-                }
-                count = 0
-            }
-        }
+//        imPointer.setOnClickListener {
+//            count++
+//            Handler().postDelayed({
+//                if (count < 5) {
+//                    count = 0
+//                }
+//            }, 2000)
+//            if (count == 5) {
+//                val editor = sharedPref.edit()
+//                for (i in index until caseOfGift.length) {
+//                    if (caseOfGift[i] != '0') {
+//                        index = i
+//                        editor.putInt(PREF_INDEX, index)
+//                        editor.apply()
+//                        break
+//                    }
+//                }
+//                val v = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+//                // Vibrate for 500 milliseconds
+//                // Vibrate for 500 milliseconds
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                    v.vibrate(VibrationEffect.createOneShot(400, VibrationEffect.DEFAULT_AMPLITUDE))
+//                } else { //deprecated in API 26
+//                    v.vibrate(400)
+//                }
+//                count = 0
+//            }
+//        }
 
         var count2 = 0
         btn_change_value.setOnClickListener {
@@ -190,25 +207,29 @@ class MainActivity : AppCompatActivity() {
                     count2 = 0
                 }
             }, 2000)
-            if (count2 == 5) {
+            if (count2 == 2) {
                 val intent = Intent(this, AdminActivity2::class.java)
                 startActivity(intent)
                 overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up)
                 count2 = 0
             }
         }
+        tvSWRnD.text = "S/W R& D"
+        styleForTextView(tvSWRnD, "UTM Androgyne.ttf")
+        tvSWRnD.visibility = View.VISIBLE
         btn_add_gen_id.setOnClickListener {
             show_greeting_quote.visibility = View.GONE
             tvGiftName.visibility = View.GONE
             imGift.visibility = View.GONE
             gim_congras.visibility = View.GONE
+            btn_spin.visibility = View.GONE
             count2++
             Handler().postDelayed({
                 if (count2 < 5) {
                     count2 = 0
                 }
             }, 2000)
-            if (count2 == 2) {
+            if (count2 == 1) {
 
                 var dialog = Dialog(this)
                 dialog.setContentView(R.layout.eemployee_dialog)
@@ -216,7 +237,7 @@ class MainActivity : AppCompatActivity() {
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
 
-                var btnCancel = dialog.findViewById<Button>(R.id.btn_dialog_cancel)
+                var btnReset = dialog.findViewById<Button>(R.id.btn_dialog_reset)
                 var btnClose = dialog.findViewById<ImageButton>(R.id.btn_dialog_imgcancel)
                 var btnSend = dialog.findViewById<Button>(R.id.btn_dialog_send)
                 var edGenId = dialog.findViewById<EditText>(R.id.ed_gen_id)
@@ -233,24 +254,47 @@ class MainActivity : AppCompatActivity() {
 //                    Log.d("SEND", "Clicked! clicked! clicked!")
 //                    Log.d("GEN_ID: ", edGenId.text.toString())
 
-                    if (genId.length == 8) {
-                        employee = getDataFromFirebase(edGenId.text.toString())
+                    if (genId.length == 8 || genId.length == 7) {
+                        employee = getDataFromFirebase(edGenId.text.toString(), "1", 'A')
                         dialog.dismiss()
+                        if (employee.name == "" || employee.name.isEmpty()) {
+                            show_greeting_quote.text = "Mã nhân viên không tồn tại!"
+                            styleForTextView(show_greeting_quote, "UTM Androgyne.ttf")
+                            show_greeting_quote.visibility = View.VISIBLE
+                        }
                     } else {
                         Toast.makeText(this, "Mã nhân viên chưa được nhập đủ!", Toast.LENGTH_SHORT)
                     }
                 }
 
-                btnCancel.setOnClickListener {
-                    dialog.dismiss()
+                btnReset.setOnClickListener {
+                    var genId = edGenId.text.toString()
+
+
+//                    Toast.makeText(this, "Clicked! clicked! clicked!", Toast.LENGTH_SHORT)
+//                        .show()
+//                    Log.d("SEND", "Clicked! clicked! clicked!")
+//                    Log.d("GEN_ID: ", edGenId.text.toString())
+
+                    if (genId.length == 8) {
+                        employee = getDataFromFirebase(edGenId.text.toString(), "0", 'R')
+                        dialog.dismiss()
+//                        if (employee.name.isEmpty()) {
+//                            show_greeting_quote.text = "Mã nhân viên không tồn tại!"
+//                            styleForTextView(show_greeting_quote, "UTM Androgyne.ttf")
+//                            show_greeting_quote.visibility = View.VISIBLE
+//                        }
+                    } else {
+                        Toast.makeText(this, "Mã nhân viên chưa được nhập đủ!", Toast.LENGTH_SHORT)
+                    }
                 }
                 btnClose.setOnClickListener {
                     dialog.dismiss()
                 }
-
                 count2 = 0
             }
         }
+
         if (employee.name != "")
             show_greeting_quote.text =
                 "Chào bạn " + employee.name + ", chúc bạn một ngày Phụ nữ Việt Nam thật vui và ý nghĩa"
@@ -296,7 +340,7 @@ class MainActivity : AppCompatActivity() {
 //        empReference2.addChildEventListener(childEventListener)
     }
 
-    fun getDataFromFirebase(genId: String): Employee {
+    fun getDataFromFirebase(genId: String, state: String, type: Char): Employee {
 //        var employee: Employee = Employee()
         //Get Firebase Instance
         var database: FirebaseDatabase = FirebaseDatabase.getInstance()
@@ -307,14 +351,13 @@ class MainActivity : AppCompatActivity() {
 
         //todo ok
         val query = empReference2.orderByChild("genid").equalTo(genId)
-        //  val query = empReference2.orderByChild("genid").equalTo("19521724")
+
         query.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val id = snapshot.key
 
                 val emp = snapshot.getValue(Employee::class.java)
                 if (emp != null) {
-//                   var map : Map<String, Objects> = emp as Map<String, Objects>
                     var no: String = emp.no
                     var genid: String = emp.genid
                     var name: String = emp.fullname
@@ -322,12 +365,12 @@ class MainActivity : AppCompatActivity() {
                     var status: String = emp.status
                     employee = Employee(no, genid, name, lastname, status)
 
-                    updateGreetingQuote(employee)
+                    if (type == 'A')
+                        updateGreetingQuote(employee)
                 }
-
                 Log.d("TOAN22222", emp.toString() + "\n id: $id")
                 //sau khi quay
-                emp?.status = "0"
+                emp?.status = state
 
                 empReference2.child(id!!).setValue(emp)
             }
@@ -342,11 +385,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.d("TOAN", " - CANCELLED")
             }
         })
 
-        Log.d("TOAN", "BEGIN")
         empReference2.addChildEventListener(childEventListener)
         return employee
     }
@@ -380,20 +421,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateGreetingQuote(employee: Employee) {
         if (employee.status.toInt() == 0) btn_spin.visibility = View.VISIBLE
-//        var typeFace: Typeface = Typeface.createFromAsset(assets, "UTM Androgyne.ttf")
-//        show_greeting_quote.typeface = typeFace
         styleForTextView(show_greeting_quote, "UTM Androgyne.ttf")
-//        var firstChar: Char = employee.name.first()
-//        when(firstChar){
-//            'A' ->
-//        }
         show_greeting_quote.text =
             "Chào bạn \"" + employee.name + "\",\nChúc bạn một ngày Phụ nữ Việt Nam\n thật vui và ý nghĩa"
         show_greeting_quote.visibility = View.VISIBLE
 
-    }
+        if (employee.genid == "") {
 
-    private fun updateEmployee() {
+        }
 
     }
 
@@ -403,39 +438,43 @@ class MainActivity : AppCompatActivity() {
         caseOfGift = sharedPref.getString(PREF_GIFT, "").toString()
     }
 
-    private fun generateArray(): String {
-        val arr = mutableListOf<Int>()
-        // tổng số lượt quay
-        for (i in 1..10) {
-            arr.add(0)
+    private fun regenerateArray(caseOfGift: String) {
+        for (i in caseOfGift.indices) {
+            arr.add(caseOfGift[i].toInt())
         }
+    }
 
+    private fun generateArray(): String {
+
+        // tổng số lượt quay
+        for (i in 1..35)
+            arr.add(0)
         /// VASERLIN
-        for (i in 1..75)
+        for (i in 1..50)
             arr.add(1)
         /// BÔNG TẨY TRANG
-        for (i in 1..70)
+        for (i in 1..43)
             arr.add(2)
         /// DAO CAO RÂU
-        for (i in 1..60)
+        for (i in 1..40)
             arr.add(3)
         /// BỘ CẮT MÓNG
-        for (i in 1..70)
+        for (i in 1..50)
             arr.add(4)
         /// TÚI ĐỰNG
-        for (i in 1..110)
+        for (i in 1..35)
             arr.add(5)
         /// BĂNG VẢI CÀI TÓC
-        for (i in 1..50)
+        for (i in 1..30)
             arr.add(6)
         /// VỚ
-        for (i in 1..60)
+        for (i in 1..40)
             arr.add(7)
         /// CHUỐI
-        for (i in 1..10)
+        for (i in 1..7)
             arr.add(8)
         /// DOVE
-        for (i in 1..40)
+        for (i in 1..30)
             arr.add(9)
 
         arr.shuffle()
@@ -505,14 +544,12 @@ class MainActivity : AppCompatActivity() {
 
         //0. no gift
         if (degrees == 0f || degrees == 360f) {
-            text = "Chúc bạn may mắn lần sau!"
-            imGift.setImageResource(R.drawable.mm)
+            text = "Túi đựng mỹ phẩm"
+            imGift.setImageResource(R.drawable.tuidung)
             gim_congras.visibility = View.GONE
-            tvGiftName.text = "Ui, trật mất rồi!"
+            tvGiftName.text = "SEHC thân gửi bạn " + employee.name + " phần quà " + text
             tvGiftName.visibility = View.VISIBLE
-            Log.d("ndt", "MM")
-        } else {
-            gim_congras.visibility = View.VISIBLE
+            Log.d("ndt", "túi đựng mỹ phẩm")
         }
         // 1. vaserlin
         if (degrees == 36f) {
@@ -562,7 +599,7 @@ class MainActivity : AppCompatActivity() {
         // 6. Băng vải cài tóc
         if (degrees == 216f) {
             text = "Băng vải cài tóc"
-            imGift.setImageResource(R.drawable.vaserlin)
+            imGift.setImageResource(R.drawable.caitoc)
             tvGiftName.text = "SEHC thân gửi bạn " + employee.name + " phần quà " + text
             tvGiftName.visibility = View.VISIBLE
             Log.d("ndt", "Băng vải cài tóc")
@@ -594,6 +631,7 @@ class MainActivity : AppCompatActivity() {
             tvGiftName.visibility = View.VISIBLE
             Log.d("ndt", "Dove")
         }
+        gim_congras.visibility = View.VISIBLE
         return tvGiftName.text.toString()
     }
 
